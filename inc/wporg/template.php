@@ -185,14 +185,18 @@ function thds_get_wporg_theme_tickets_url( $theme_id = 0 ) {
  * @param  string  $property
  * @return mixed
  */
-function thds_get_wporg_theme_property( $theme_id = 0, $property ) {
+function thds_get_wporg_theme_property( $theme_id = 0, $property='' ) {
 
 	$theme_id = thds_get_theme_id( $theme_id );
 
 	$theme_object = thds_get_wporg_theme( $theme_id );
 
-	$data = isset( $theme_object->$property ) ? $theme_object->$property : '';
+    if($property!=='') {
+        $data = isset($theme_object->$property) ? $theme_object->$property : '';
+    }else{
+        $data = '';
 
+    }
 	return apply_filters( "thds_get_wporg_theme_{$property}", $data, $theme_id );
 }
 
