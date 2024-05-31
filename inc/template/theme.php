@@ -960,10 +960,17 @@ function thds_get_theme_wporg_slug( $theme_id = 0 ) {
  * @param  int     $theme_id
  * @return void
  */
-function thds_theme_download_count( $theme_id = 0 ) {
+function thds_theme_download_count( $theme_id = 0, $echo = true ) {
+	$download_count  = absint( thds_get_theme_download_count( $theme_id ) );
+	$formatted_count = number_format_i18n( $download_count );
 
-	echo number_format_i18n( absint( thds_get_theme_download_count( $theme_id ) ) );
+	if ( $echo ) {
+		echo esc_html( $formatted_count );
+	} else {
+		return esc_html( $formatted_count );
+	}
 }
+
 
 /**
  * Returns the theme download count.
