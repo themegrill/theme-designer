@@ -595,9 +595,21 @@ function thds_get_theme_demo_link( $args = array() ) {
  * @param  int     $theme_id
  * @return void
  */
-function thds_theme_repo_url( $theme_id = 0 ) {
+function thds_theme_repo_url( $theme_id = 0, $echo = true, $additional_params = array() ) {
 
-	echo esc_url( thds_get_theme_repo_url( $theme_id ) );
+	$url = thds_get_theme_repo_url( $theme_id );
+
+	if ( ! empty( $additional_params ) && is_array( $additional_params ) ) {
+		$url = add_query_arg( $additional_params, $url );
+	}
+
+	$escaped_url = esc_url( $url );
+
+	if ( $echo ) {
+		echo $escaped_url;
+	} else {
+		return $escaped_url;
+	}
 }
 
 /**
